@@ -1,0 +1,2 @@
+# WeatherFinder
+WeatherFinder - JS, AJAX
