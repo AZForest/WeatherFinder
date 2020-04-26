@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="left-bar" id="left-bar">
+        <div class="logo">
+            <img src="Images/globewhite.png">
+        </div>
+        <ul>
+            <li>Get the current weather conditions for any city in the world.</li>
+            <li>Search format is city name, comma, space, and then country name or iso code.<br /><br />Ex.:<br />'Los Angeles, United States'<br />or<br />'los angeles, us'<br /><br />Not case sensitive.
+            </li>
+            <li>Randomly select any city in the world by pressing the <i class="fas fa-random"></i> button.</li>
+            <li>Right bar contains list of country iso codes.</li>
+            <li class="end">Powered by DarkSky.net</li>
+        </ul>
+    </div>
+    <div class="right-bar" id="right-bar"></div>
+
+    <header>
+        <button id="toggle" class="toggle">
+            <i class="fa fa-bars fa-2x"></i>
+        </button>
+        <h1>Weather Finder</h1>
+        <div class="form-container" id="form-container">
+            <form id="submit" class="flex">
+                <input type="text" id="search" placeholder="Search for a location">
+                <button class="search-btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <button class="random-btn" id="random">
+                <i class="fas fa-random"></i>
+            </button>
+            <div class='search-results' id="search-results"></div>
+        </div>
+        <button id="toggle2" class="toggle2">
+            <p>ISO Codes</p>
+            <i class="fas fa-angle-down fa-2x"></i>
+        </button>
+    </header>
+
+    <main>
+        
+        
+        <div class="bg-img-container" id="bg-img-container">
+            <img src="Images/worldmap1.jpg">
+            <div id="search-div" class="search-div">
+                <div id="search-dot" class="search-dot dot"></div>
+                <label id="search-label"></label>
+            </div>
+            <div class="la" id='la'>
+                <div id="dot" class="dot"></div>
+                <label id="la-label">Los Angeles, US</label>
+            </div>
+            <div class="mc" id='mc'>
+                <div id="dot" class="dot"></div>
+                <label id="mc-label">Mexico City, MX</label>
+            </div>
+            <div class="ny" id='ny'>
+                <div id="dot" class="dot"></div>
+                <label id="ny-label">New York, US</label>
+            </div>
+            <div class="sp" id='sp'>
+                <div id="dot" class="dot"></div>
+                <label id="sp-label">Sao Paulo, BR</label>
+            </div>
+            <div class="ty" id='ty'>
+                <div id="dot" class="dot"></div>
+                <label id="ty-label">Tokyo, JP</label>
+            </div>
+            <div class="be" id='be'>
+                <div id="dot" class="dot"></div>
+                <label id="be-label">Beijing, CN</label>
+            </div>
+            <div class="de" id='de'>
+                <div id="dot" class="dot"></div>
+                <label id="de-label">Delhi, IN</label>
+            </div>
+            <div class="ca" id='ca'>
+                <div id="dot" class="dot"></div>
+                <label id="ca-label">Cairo, EG</label>
+            </div>
+            <div class="mo" id='mo'>
+                <div id="dot" class="dot"></div>
+                <label id="mo-label">Moscow, RU</label>
+            </div>
+            <div class="sy" id='sy'>
+                <div id="dot" class="dot"></div>
+                <label id="sy-label">Sydney, AU</label>
+            </div>
+        </div>
+        
+        
+        <div id="result-description"></div>
+    </main>
+    
+
+    <script src="script.js"></script>
+    <script src="skycons.js"></script>
+</body>
+</html>
