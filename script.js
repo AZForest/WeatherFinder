@@ -4,16 +4,17 @@
 //colors
 let red = '#d10b64';
 let orange = '#FFBD51';
+let blue = '#0BBDD1';
 
 const toggle = document.getElementById('toggle');
 const toggle2 = document.getElementById('toggle2');
 const map = document.getElementById('bg-img-container');
-const cities = document.querySelectorAll('.dot');
+const cities = document.querySelectorAll('.city');
 const resultHeading = document.getElementById('result-heading');
 const resultDescription = document.getElementById('result-description');
 const search = document.getElementById('search');
 const submit = document.getElementById('submit');
-const searchDot = document.getElementById('search-div');
+const searchCity = document.getElementById('search-city');
 const searchLabel = document.getElementById('search-label');
 const random = document.getElementById('random');
 //const formContainer = document.getElementById('form-container');
@@ -39,35 +40,35 @@ let defCityArray = [mc, la, ny, sp, be, ty, de, ca, mo, sy];
 
 
 window.onload = function() {
-    const skycons = new Skycons({"color": "#0BBDD1"});
+    /*const skycons = new Skycons({"color": "#0BBDD1"});
     skycons.add(document.getElementById('icon1'), Skycons.CLEAR_DAY);
     skycons.add(document.getElementById('icon2'), Skycons.PARTLY_CLOUDY_DAY);
     skycons.add(document.getElementById('icon3'), Skycons.RAIN);
-    skycons.play();
+    skycons.play();*/
 
-    this.initializeDots(19.42847, -99.12766, mc);
-    this.initializeDots(34.0522, -118.2437, la);
-    this.initializeDots(46.51802, -95.37615, ny);
-    this.initializeDots(-23.5505, -46.6333, sp);
-    this.initializeDots(39.9075, 116.39723, be);
-    this.initializeDots(35.6895, 139.69171, ty);
-    this.initializeDots(28.7041, 77.1025, de);
-    this.initializeDots(30.0444, 31.2357, ca);
-    this.initializeDots(55.75222, 37.61556, mo);
-    this.initializeDots(-33.8688, 151.2093, sy);
+    this.initializeCity(19.42847, -99.12766, mc);
+    this.initializeCity(34.0522, -118.2437, la);
+    this.initializeCity(46.51802, -95.37615, ny);
+    this.initializeCity(-23.5505, -46.6333, sp);
+    this.initializeCity(39.9075, 116.39723, be);
+    this.initializeCity(35.6895, 139.69171, ty);
+    this.initializeCity(28.7041, 77.1025, de);
+    this.initializeCity(30.0444, 31.2357, ca);
+    this.initializeCity(55.75222, 37.61556, mo);
+    this.initializeCity(-33.8688, 151.2093, sy);
+}
 
-
-    //converts to array
-    /*let renderDefault = defaultCities.map(city => {
-        let x = [ city.substr(0, city.indexOf(',')) , city.substr(city.length - 2, city.length - 1) ];
-        return x;
-    });
-    let renderDefault2 = renderDefault.map(item => {
-        console.log(item[0], item[1]);
-        return getCoords(item[0], item[1]);
-    })
-    console.log(renderDefault2);*/
-
+window.onresize = function () {
+    this.initializeCity(19.42847, -99.12766, mc);
+    this.initializeCity(34.0522, -118.2437, la);
+    this.initializeCity(46.51802, -95.37615, ny);
+    this.initializeCity(-23.5505, -46.6333, sp);
+    this.initializeCity(39.9075, 116.39723, be);
+    this.initializeCity(35.6895, 139.69171, ty);
+    this.initializeCity(28.7041, 77.1025, de);
+    this.initializeCity(30.0444, 31.2357, ca);
+    this.initializeCity(55.75222, 37.61556, mo);
+    this.initializeCity(-33.8688, 151.2093, sy);
 }
 
 
@@ -79,14 +80,18 @@ function registerPoint(e) {
 }
 
 async function getCoords(city, isoCode) {
+    console.log(city);
+    if (city === 'New York') {
+        city = 'New York Mills';
+    }
     //console.log(city, country);
     const res = await fetch('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json');
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     let x = data.filter(obj => {
         return obj["name"].normalize("NFD").replace(/[\u0300-\u036f]/g, "") === city && obj["country"] === isoCode.trim();
     })
-    console.log(x);
+    //console.log(x);
     /*if (x.length > 1) {
         //console.log(random);
         searchResults.style.visibility = 'visible';
@@ -96,7 +101,9 @@ async function getCoords(city, isoCode) {
         ;
     }*/
     if (x.length === 0 ) {
-        resultDescription.innerHTML = `<h3>Unable to match a city and country combination with what you entered.</h3>`
+        resultDescription.innerHTML = `<p>Unable to match a city and country combination with what you entered.</p>`
+        resultDescription.style.color = "white";
+
     }
     let coords = [ x[0]["lat"], x[0]["lng"] ];
     //resultHeading.innerHTML = `<h2>${city}, ${getCountry(isoCode)}</h2>`;
@@ -105,7 +112,12 @@ async function getCoords(city, isoCode) {
 
 //gets random location
 async function getRandomLocation() {
-    resultDescription.innerHTML = '<h2 class="loading">Loading...</h2>';
+    resultDescription.innerHTML = `
+        <h2 class="loading">Loading...</h2>
+        <div class="loading-container">
+            <div class="lds-dual-ring"></div>
+        </div>
+        `;
     resultDescription.style.visibility = 'visible';
     const res = await fetch('https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json');
     const data = await res.json();
@@ -117,7 +129,7 @@ async function getRandomLocation() {
 
     //console.log(randomCity, randomIso);
     cities.forEach(city => {
-        city.style.background = orange;
+        city.style.background = blue;
     })
 
     renderData(randomCity.trim(), randomIso.trim());
@@ -125,15 +137,19 @@ async function getRandomLocation() {
 
 //click dot
 function selectDot(e) {
-    console.log('k');
-    if (e.target.classList.contains("dot")) {
+    if (e.target.classList.contains("city")) {
         let x = window.getComputedStyle(e.target);
         //console.log(x.getPropertyValue('background-color'));
-        resultDescription.innerHTML = '<h2 class="loading">Loading...</h2>';
+        resultDescription.innerHTML = `
+            <h2 class="loading">Loading...</h2>
+            <div class="loading-container">
+                <div class="lds-dual-ring"></div>
+            </div>
+            `;
         resultDescription.style.visibility = 'visible';
         if (x.getPropertyValue('background-color') !== red) {
             cities.forEach(item => {
-                item.style.background = orange;
+                item.style.background = blue;
             });
             e.target.style.background = red;
 
@@ -152,14 +168,21 @@ async function searchLocation(e) {
 
     //resultHeading.innerHTML = '';
     //resultDescription.innerHTML = '';
-    resultDescription.innerHTML = '<h2 class="loading">Loading...</h2>';
+    resultDescription.innerHTML = `
+        <h2 class="loading">Loading...</h2>
+        <div class="loading-container">
+            <div class="lds-dual-ring"></div>
+        </div>
+        `;
+
     resultDescription.style.visibility = 'visible';
     const searchTerm = search.value;
     const location = searchTerm.split(',');
     let isoCode;
 
     if (location.length < 2) {
-        resultDescription.innerHTML = `<h5>Unable to match a city and country combination with what you entered.</h5>`
+        resultDescription.innerHTML = `<p>Unable to match a city and country combination with what you entered.</p>`;
+        resultDescription.style.color = "white";
     }
 
     //handles iso code input
@@ -186,49 +209,42 @@ async function searchLocation(e) {
 
     //clears all dots
     cities.forEach(item => {
-        item.style.background = orange;
+        item.style.background = blue;
     })
     //sets dot to red if 
-    cities.forEach(item => {
+    /*cities.forEach(item => {
         for (let i = 0; i < 6; i++) {
-            //console.log(item.nextElementSibling.innerHTML);
-            console.log(`${city}, ${isoCode}`);
-            //console.log(item.nextElementSibling.innerHTML === `${location[0]}, ${isoCode}`);
             if (item.nextElementSibling.innerHTML === `${location[0]}, ${isoCode}`) {
                 item.style.background = red;
             }
         }
-    })
+    })*/
     //location[0]
     renderData(city, isoCode);
 }
 
 
 function displayData(select) {
-    let parent = select.parentElement.classList.item(0);
-    console.log(parent);
-    let label = document.getElementById(`${parent}-label`);
+    //let parent = select.parentElement.classList.item(0);
+    //console.log(parent);
+    //let label = document.getElementById(`${parent}-label`);
 
     //console.log(label.innerHTML);
-    const location = label.innerHTML.split(',');
+    const location = select.innerHTML.split(',');
     renderData(location[0], location[1].trim());
 }
 
 async function renderData(city, isoCode) {
     const result = await getCoords(city, isoCode);
-    console.log(result.length);
     let lat = result[0];
     let long = result[1];
-    addSearchDot(lat, long, city, isoCode);
-    console.log("here");
+    addSearchCity(lat, long, city, isoCode);
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     //console.log('here');
-    const darkSky = await fetch(`${proxy}https://api.darksky.net/forecast/8c5ee7a62a87ef9ec2fdc70c746dbd83/${lat},${long}`);
-    console.log(darkSky);
-    const data = await darkSky.json();
-    /*.then(res =>
-        res.json())
-    .then(data => {*/
+    try {
+        let darkSky = await fetch(`${proxy}https://api.darksky.net/forecast/8c5ee7a62a87ef9ec2fdc70c746dbd83/${lat},${long}`);
+        console.log(darkSky);
+        const data = await darkSky.json();
         console.log(data);
         resultDescription.style.visibility = "visible";
         resultDescription.innerHTML = `
@@ -239,9 +255,9 @@ async function renderData(city, isoCode) {
             <ul>
                 <li>Lat/Long: <span>${data.latitude < 0 ? Math.abs(data.latitude).toFixed(1) + 'S' : data.latitude.toFixed(1) + 'N'}, ${data.longitude < 0 ? Math.abs(data.longitude).toFixed(1) + 'W' : data.longitude.toFixed(1) + 'E'}</span></li>
                 <li>TZ: <span>${data.timezone}</span></li>
-                <li>Cloud Cover: <span>${data.currently.cloudCover}</span></li>
                 <li>Dew Point: <span>${data.currently.dewPoint}</span></li>
                 <li>Humidity: <span>${data.currently.humidity}</span></li>
+                <li>Ozone: <span>${data.currently.ozone}</span></li>
             </ul>
             <ul class="first">
                 <li class="temp">${data.currently.temperature.toFixed(0)}°</li>
@@ -263,17 +279,27 @@ async function renderData(city, isoCode) {
         </div>
         `;
 
-    ;
-    setIcons(data.currently.icon, document.getElementById('icon4'));
-    const xButton = document.getElementById('x');
-    xButton.addEventListener('click', function() {
-        resultDescription.style.visibility = "hidden";
-        //defaultDesc.style.visibility = "visible";
-        searchDot.style.visibility = "hidden";
-        cities.forEach(city => {
-            city.style.background = orange;
-        })
-    });
+        setIcons(data.currently.icon, document.getElementById('icon4'));
+        const xButton = document.getElementById('x');
+        xButton.addEventListener('click', function() {
+            resultDescription.style.visibility = "hidden";
+            //defaultDesc.style.visibility = "visible";
+            searchCity.style.visibility = "hidden";
+            cities.forEach(city => {
+                city.style.background = blue;
+            })
+        });
+    } catch(err) {
+        resultDescription.style.visibility = "visible";
+        resultDescription.innerHTML = `
+            ${err}
+            <br />
+            This error likely occurred from the server receiving too many requests.
+            `;
+        resultDescription.style.color = "white";
+    }
+   
+    
 
     //defaultDesc.style.visibility = "hidden";
 }
@@ -307,7 +333,7 @@ function getCountry(isoCode) {
 }
 
 //initialize dots
-function initializeDots(lat, long, cityDOM) {
+function initializeCity(lat, long, cityDOM) {
     let newLat;
     if (lat < 0) {
         newLat = 90 + Math.abs(lat);
@@ -321,19 +347,20 @@ function initializeDots(lat, long, cityDOM) {
     } else {
         newLong = +long + 180;
     }
-    let x = (newLong * 1.83953) + 290;
+    //let w = window.getComputedStyle(map);
+    let x = (newLong * 1.83953) + map.offsetLeft;
     let y = (newLat * 2.71186) + 141;
 
-    cityDOM.style.top = y + 'px';
-    cityDOM.style.left = x + 'px';
+    cityDOM.style.top = (y + 5) + 'px';
+    cityDOM.style.left = (x - 30) + 'px';
 }
 
 //creates dot at search location 
-function addSearchDot(lat, long, city, isoCode) {
+function addSearchCity(lat, long, city, isoCode) {
     //resets position
-    searchDot.style.visibility = 'visible';
-    searchDot.style.top = 0;
-    searchDot.style.left = 0;
+    searchCity.style.visibility = 'visible';
+    searchCity.style.top = 0;
+    searchCity.style.left = 0;
 
     
     //converts lat to positive (1 - 180)
@@ -358,17 +385,17 @@ function addSearchDot(lat, long, city, isoCode) {
 
     //long coord -> 1.84 ratio between map-width and geographic coords
     //376 = width of screen before map begins
-    let x = (newLong * 1.83953) + 290;
+    let x = (newLong * 1.83953) + map.offsetLeft;
     //console.log('x = ' + x);
     //lat coord -> 2.67 ratio | 171 pixels down
     let y = (newLat * 2.71186) + 141;
     //console.log('y = ' + y);
     //searchDot.style.display = 'normal';
-    searchDot.style.top = (y) + 'px';
+    searchCity.style.top = (y + 5) + 'px';
     console.log('top = ' + y)
-    searchDot.style.left = (x) + 'px';
+    searchCity.style.left = (x - 30) + 'px';
     console.log('top = ' + x)
-    searchLabel.innerHTML = `${city}, ${isoCode}`;
+    searchCity.innerHTML = `${city}, ${isoCode}`;
 }
 
 function showRightBar() {
@@ -397,8 +424,8 @@ function convertTime(time) {
     //let result = mili.toString();
     //return result;
 
-    let mili = new Date(time);
-    return mili.toString();
+    let date = new Date(time * 1000);
+    return date.toString();
 }
 
 function setIcons(icon, iconID) {
@@ -408,6 +435,7 @@ function setIcons(icon, iconID) {
     skycons.play();
     return skycons.set(iconID, Skycons[currentIcon]);
 }
+
 submit.addEventListener('submit', searchLocation);
 map.addEventListener('click', selectDot);
 toggle.addEventListener('click', () => {

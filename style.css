@@ -3,6 +3,7 @@
 :root {
     --primary-color: #0BBDD1;
     --orange-color: #FFBD51;
+    --red-color: #d10b64;
 }
 
 body {
@@ -12,7 +13,7 @@ body {
     background-color:#EBFDFF;
     transition: transform 0.3s ease;
     font-family: 'Lato', sans-serif;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 body.show-nav {
@@ -22,14 +23,15 @@ body.show-nav {
 .left-bar {
     background-color: grey;
     color: #fff;
-    position: fixed;
-    bottom: 0;
-    height: 85vh;
+    position: absolute;
+    top: 120px;
+    height: 100vh;
     width: 250px;
     transform: translateX(-100%);
     transition: transform 0.5s ease;
     z-index: 5;
     font-size: 14px;
+    border-right: 2px solid var(--orange-color);
 }
 
 .left-bar.translate {
@@ -65,14 +67,16 @@ body.show-nav {
 
 .right-bar {
     background-color: var(--primary-color);
+    border: 2px solid gainsboro;
     color: #fff;
     border-radius: 15px;
-    position: fixed;
-    bottom: 15px;
-    height: 78vh;
+    position: absolute;
+    top: 160px;
+    height: 70vh;
     width: 200px;
     right: 0px;
     visibility: hidden;
+    z-index: 100;
 }
 .right-bar .iso-row {
     text-align: center;
@@ -89,14 +93,16 @@ header {
     background-color: var(--primary-color);
     color: white;
     text-shadow: 0 0 1px grey;
-    height: 12.5vh;
+    height: 100px;
+    border-bottom: 2px solid gainsboro;
     
 }
 
 header h1 {
-    margin: 15px 0 0 0;
+    margin: 5px 0 0 0;
     padding: 0;
     font-weight: 700;
+    text-shadow: 1px 1px 1px grey;
 }
 
 .form-container {
@@ -178,6 +184,7 @@ input:focus {
     color: var(--primary-color);
     cursor: pointer;
     display: flex;
+    font-weight: 400;
 }
 .toggle2 p {
     padding: 2px;
@@ -188,7 +195,7 @@ input:focus {
 
 .bg-img-container {
     width: 700px;
-    height: 50vh;
+    height: 400px;
     margin: 20px auto;
     /*position: relative;*/
     z-index: 0;
@@ -199,22 +206,22 @@ input:focus {
     width: 100%;
 }
 
-.dot {
+/*.dot {
     width: 10px;
     height: 10px;
     border-radius: 50px;
     background-color: var(--orange-color);
-    z-index: 50;
+    z-index: 0;
     cursor: pointer;
     margin: auto;
+    visibility: hidden;
 }
 
 .dot:hover {
     transform: scale(1.5);
 }
 
-label {
-    color: black;
+/*label {
     background-color: var(--primary-color);
     border-radius: 5px;
     font-size: 12px;
@@ -222,11 +229,47 @@ label {
     top: 0px;
     padding: 0 5px;
     color: #fff;
+}*/
+
+.city {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    z-index: 0;
+    height: auto;
+    font-size: 12px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 5px;
 }
 
-.la {
+.city:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.search-city {
+    background-color: var(--red-color);
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 5px;
+    z-index: 1;
+    height: auto;
+    font-size: 12px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 5px;
+}
+
+/*.la {
     transform: translateX(-50%);
     position: absolute;
+}
+
+.la label:hover {
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .ny {
@@ -268,7 +311,7 @@ label {
 .sy {
     transform: translateX(-50%);
     position: absolute;
-}
+}*/
 
 #search-div {
     transform: translateX(-50%);
@@ -276,6 +319,7 @@ label {
     top: 0;
     left: 0;
     z-index: 100;
+    visibility: hidden;
 }
 
 .search-dot {
@@ -302,25 +346,19 @@ label {
     margin-top: 30px;
 }
 
-.default-info canvas {
-    margin: 0 20px;
-}
-
-.loading {
-    color: black;
-}
-
 #result-description {
     text-align: center;
     background-color: var(--primary-color);
-    border-radius: 25px;
+    border-radius: 15px;
     color: black;
     display: grid;
-    height: 26vh;
-    width: 52.5%;
+    height: 200px;
+    width: 680px;
     margin: 0 auto;
     position: relative;
     visibility: hidden;
+    border: 2px solid gainsboro;
+    padding:0;
 }
 
 #result-description h2 {
@@ -337,7 +375,7 @@ label {
     font-weight: 400;
 }
 #result-description h5 {
-    color: #fff;
+    color: #fff !important;
     font-size: 16px;
 }
 
@@ -385,6 +423,7 @@ label {
 
 #result-description .icon-ul .temp-desc {
     font-size: 14px;
+    width: 102.5%;
 }
 
 #result-description h2 span {
@@ -395,7 +434,7 @@ label {
 #result-description .row {
     display: flex;
     justify-content: space-evenly;
-    margin: 0 0 30px 0;
+    margin: 0 0 30px 5px;
     padding: 0;
 }
 
@@ -442,5 +481,47 @@ label {
     padding: 0;
     margin: 0;
 }
+
+.loading-container {
+    padding: 0;
+    margin: 0 auto;
+    height: 70px;
+    width: 70px;
+}
+
+.loading-bar {
+    height: 64px;
+    width: 64px;
+    border: 0;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 68px;
+    margin: auto;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 3.6s linear infinite;
+    
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 
 
