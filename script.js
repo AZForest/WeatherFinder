@@ -349,7 +349,14 @@ function initializeCity(lat, long, cityDOM) {
     }
     //let w = window.getComputedStyle(map);
     let x = (newLong * 1.83953) + map.offsetLeft;
-    let y = (newLat * 2.71186) + 141;
+    let y = (newLat * 2.71186) + map.offsetTop;
+    let z = window.getComputedStyle(map);
+    //console.log(z.width);
+    if (parseInt(z.width, 10) > 900) {
+        //console.log("hi");
+        x = x + (x * 0.4) - 190;
+        y = y + (y * 0.4) - 70;
+    }
 
     cityDOM.style.top = (y + 5) + 'px';
     cityDOM.style.left = (x - 30) + 'px';

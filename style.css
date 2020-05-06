@@ -33,6 +33,28 @@ body.show-nav {
     font-size: 14px;
     border-right: 2px solid var(--orange-color);
 }
+@media (min-width: 1600px) {
+    .left-bar {
+        width: 350px;
+        top: 170px;
+        border-right: 4px solid var(--orange-color);
+    }
+    .left-bar .logo {
+        position: relative;
+        top: 35px;
+    }
+    .left-bar .logo img {
+        transform: scale(1.4);
+    }
+    .left-bar ul {
+        position: relative;
+        top: 65px;
+        font-size: 20px;
+    }
+    .left-bar ul li {
+        border-bottom: 4px solid #fff;
+    }
+}
 
 .left-bar.translate {
     transform: translateX(0%);
@@ -61,6 +83,15 @@ body.show-nav {
     padding: 15px;
     text-align: center;
 }
+.left-bar ul li a {
+    text-decoration: none;
+    color: #fff;
+    
+}
+.left-bar ul li a:hover {
+    color: var(--orange-color);
+}
+
 .left-bar ul li:first-of-type {
     border-top: 2px solid #fff;
 }
@@ -103,6 +134,21 @@ header h1 {
     padding: 0;
     font-weight: 700;
     text-shadow: 1px 1px 1px grey;
+}
+
+@media (min-width: 1600px) {
+    header {
+        height: 150px;
+        border-bottom: 3px solid gainsboro;
+    }
+    header h1 {
+        font-size: 285%;
+        margin-top: 10px;
+    }
+    .form-container {
+        transform: scale(1.4);
+        margin-top: 10px;
+    }
 }
 
 .form-container {
@@ -175,6 +221,15 @@ input:focus {
     cursor: pointer;
     z-index: 10;
 }
+
+@media (min-width: 1600px) {
+    .toggle {
+        transform: scale(1.4);
+        top: 190px;
+        left: 20px;
+    }
+}
+
 .toggle2 {
     position: absolute;
     top: 125px;
@@ -191,6 +246,13 @@ input:focus {
     margin: 0 10px 0 0;
     font-size: 16px;
 }
+@media (min-width: 1600px) {
+    .toggle2 {
+        transform: scale(1.4);
+        top: 185px;
+        right: 20px;
+    }
+}
 
 
 .bg-img-container {
@@ -199,6 +261,19 @@ input:focus {
     margin: 20px auto;
     /*position: relative;*/
     z-index: 0;
+}
+@media (min-width: 1600px) {
+    .bg-img-container {
+        height: 560px;
+        width: 980px;
+        background-color: burlywood;
+    }
+    .city {
+        transform: scale(1.4);
+    }
+    .city:hover {
+        transform: scale(2.5);
+    }
 }
 
 .bg-img-container img {
