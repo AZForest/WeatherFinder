@@ -30,7 +30,7 @@ body.show-nav {
     transform: translateX(-100%);
     transition: transform 0.5s ease;
     z-index: 5;
-    font-size: 14px;
+    font-size: 12px;
     border-right: 2px solid var(--orange-color);
 }
 @media (min-width: 1600px) {
@@ -49,7 +49,7 @@ body.show-nav {
     .left-bar ul {
         position: relative;
         top: 65px;
-        font-size: 20px;
+        font-size: 18px;
     }
     .left-bar ul li {
         border-bottom: 4px solid #fff;
@@ -79,7 +79,7 @@ body.show-nav {
 }
 
 .left-bar ul li {
-    border-bottom: 2px solid #fff;
+    border-bottom: 1px solid #fff;
     padding: 15px;
     text-align: center;
 }
@@ -93,7 +93,7 @@ body.show-nav {
 }
 
 .left-bar ul li:first-of-type {
-    border-top: 2px solid #fff;
+    border-top: 1px solid #fff;
 }
 
 .right-bar {
@@ -113,7 +113,17 @@ body.show-nav {
     text-align: center;
     padding: 0 5px;
     margin: -10px auto;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+@media (min-width: 1600px) {
+    .right-bar {
+        height: 50vh;
+        transform: scale(1.4);
+        top: 330px;
+        right: 42.5px;
+        border: 2px solid gainsboro;
+    }
 }
 
 /*color-one: rgba(17,206,227)*/
@@ -190,6 +200,12 @@ input:focus {
     background-color: #fff;
 }
 
+@media (min-width: 1600px) {
+    .search-btn {
+        margin-left: -1px;
+    }
+}
+
 .random-btn {
     height: 30px;
     width: 30px;
@@ -249,8 +265,8 @@ input:focus {
 @media (min-width: 1600px) {
     .toggle2 {
         transform: scale(1.4);
-        top: 185px;
-        right: 20px;
+        top: 182.5px;
+        right: 40px;
     }
 }
 
@@ -266,13 +282,15 @@ input:focus {
     .bg-img-container {
         height: 560px;
         width: 980px;
-        background-color: burlywood;
     }
     .city {
         transform: scale(1.4);
     }
     .city:hover {
-        transform: scale(2.5);
+        transform: scale(1.5) !important;
+    }
+    .search-city {
+        transform: scale(1.4);
     }
 }
 
@@ -434,6 +452,13 @@ input:focus {
     visibility: hidden;
     border: 2px solid gainsboro;
     padding:0;
+}
+
+@media (min-width: 1600px) {
+    #result-description {
+        margin-top: 80px;
+        transform: scale(1.4);
+    }
 }
 
 #result-description h2 {

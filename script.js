@@ -292,6 +292,7 @@ async function renderData(city, isoCode) {
     } catch(err) {
         resultDescription.style.visibility = "visible";
         resultDescription.innerHTML = `
+            <br />
             ${err}
             <br />
             This error likely occurred from the server receiving too many requests.
@@ -351,9 +352,7 @@ function initializeCity(lat, long, cityDOM) {
     let x = (newLong * 1.83953) + map.offsetLeft;
     let y = (newLat * 2.71186) + map.offsetTop;
     let z = window.getComputedStyle(map);
-    //console.log(z.width);
     if (parseInt(z.width, 10) > 900) {
-        //console.log("hi");
         x = x + (x * 0.4) - 190;
         y = y + (y * 0.4) - 70;
     }
@@ -395,9 +394,16 @@ function addSearchCity(lat, long, city, isoCode) {
     let x = (newLong * 1.83953) + map.offsetLeft;
     //console.log('x = ' + x);
     //lat coord -> 2.67 ratio | 171 pixels down
-    let y = (newLat * 2.71186) + 141;
+    let y = (newLat * 2.71186) + map.offsetTop;
     //console.log('y = ' + y);
     //searchDot.style.display = 'normal';
+
+    let z = window.getComputedStyle(map);
+    if (parseInt(z.width, 10) > 900) {
+        x = x + (x * 0.4) - 190;
+        y = y + (y * 0.4) - 70;
+    }
+
     searchCity.style.top = (y + 5) + 'px';
     console.log('top = ' + y)
     searchCity.style.left = (x - 30) + 'px';
