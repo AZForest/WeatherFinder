@@ -355,12 +355,10 @@ function initializeCity(lat, long, cityDOM) {
     let windowWidth = window.innerWidth;
     console.log(windowWidth);
     if (parseInt(z.width, 10) > 900) {
-        console.log('ereee');
         x = x + (x * 0.4) - 190;
         y = y + (y * 0.4) - 70;
     }
     if (parseInt(windowWidth, 10) > 2000) {
-        console.log("heree");
         x = x - 130;
     }
 
@@ -409,6 +407,9 @@ function addSearchCity(lat, long, city, isoCode) {
     if (parseInt(z.width, 10) > 900) {
         x = x + (x * 0.4) - 190;
         y = y + (y * 0.4) - 70;
+    }
+    if (parseInt(window.innerWidth, 10) > 2000) {
+        x = x - 130;
     }
 
     searchCity.style.top = (y + 5) + 'px';
