@@ -352,9 +352,16 @@ function initializeCity(lat, long, cityDOM) {
     let x = (newLong * 1.83953) + map.offsetLeft;
     let y = (newLat * 2.71186) + map.offsetTop;
     let z = window.getComputedStyle(map);
+    let windowWidth = window.innerWidth;
+    console.log(windowWidth);
     if (parseInt(z.width, 10) > 900) {
+        console.log('ereee');
         x = x + (x * 0.4) - 190;
         y = y + (y * 0.4) - 70;
+    }
+    if (parseInt(windowWidth, 10) > 2000) {
+        console.log("heree");
+        x = x - 130;
     }
 
     cityDOM.style.top = (y + 5) + 'px';
