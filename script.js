@@ -101,7 +101,7 @@ async function getCoords(city, isoCode) {
         ;
     }*/
     if (x.length === 0 ) {
-        resultDescription.innerHTML = `<p>Unable to match a city and country combination with what you entered.</p>`
+        resultDescription.innerHTML = `<p>Unable to match a city and country combination. This error likely occurred from the server receiving too many requests.</p>`
         resultDescription.style.color = "white";
 
     }
@@ -181,7 +181,7 @@ async function searchLocation(e) {
     let isoCode;
 
     if (location.length < 2) {
-        resultDescription.innerHTML = `<p>Unable to match a city and country combination with what you entered.</p>`;
+        resultDescription.innerHTML = `<p>Unable to match a city and country combination. This error likely occurred from the server receiving too many requests.</p>`;
         resultDescription.style.color = "white";
     }
 
