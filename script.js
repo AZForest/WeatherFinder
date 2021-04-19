@@ -242,12 +242,46 @@ async function renderData(city, isoCode) {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     //console.log('here');
     try {
-        let darkSky = await fetch(`${proxy}https://api.darksky.net/forecast/8c5ee7a62a87ef9ec2fdc70c746dbd83/${lat},${long}`);
+        /* let darkSky = await fetch(`${proxy}https://api.darksky.net/forecast/8c5ee7a62a87ef9ec2fdc70c746dbd83/${lat},${long}`);
         console.log(darkSky);
-        const data = await darkSky.json();
+        const data = await darkSky.json(); */
+        const openWeather = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=0ac2666dd0ae54a2d9033ee17a74d8f4`)
+        console.log(openWeather);
+        const data = await openWeather.json();
         console.log(data);
         resultDescription.style.visibility = "visible";
         resultDescription.innerHTML = `
+        <h2>${city}, ${getCountry(isoCode)}</h2>
+        <h4>${convertTime(data.dt)}</h4>
+        <p id="x" class="x">x</p>
+        <div class="row">
+            <ul>
+                <li>Lat/Long: <span>${data.coord.lat < 0 ? Math.abs(data.coord.lat).toFixed(1) + 'S' : data.coord.lat.toFixed(1) + 'N'}, ${data.coord.lon < 0 ? Math.abs(data.coord.lon).toFixed(1) + 'W' : data.coord.lon.toFixed(1) + 'E'}</span></li>
+                <li>TZ: <span>${data.timezone}</span></li>
+                <li>Cloud Cover: <span>${data.clouds.all}%</span></li>
+                <li>Pressure: <span>${data.main.pressure}</span></li>
+                <li>Humidity: <span>${data.main.humidity}%</span></li>
+            </ul>
+            <ul class="first">
+                <li class="temp">${convertCel(data.main.temp)}° C</li>
+                <li>${convertFah(data.main.temp)}° F</li>
+                <li>feels like ${convertCel(data.main.feels_like)}° C</li> 
+            </ul>
+            <div class="icon-ul">
+                <img src="images/icons/${data.weather[0].icon}.png" width=90 height=90/>
+                <p><span>${data.weather[0].main}</span></p>
+            </div>
+            <ul>
+                <li>Visibility: <span>${data.visibility}</span></li>
+                <li>Wind Dir: <span>${data.wind.deg}°</span></li>
+                <li>Wind Speed: <span>${data.wind.speed} m/sec</span></li>
+                <li>Sunrise: <span>${convertTimeFormat(data.sys.sunrise)}</span></li>
+                <li>Sunset: <span>${convertTimeFormat(data.sys.sunset)}</span></li>
+            </ul>
+        </div>
+        `;
+        /*<div><canvas id="icon4" width="70" height="70"><img src="images/icons/01d.png"/></canvas></div>*/
+        /* resultDescription.innerHTML = `
         <h2>${city}, ${getCountry(isoCode)}</h2>
         <h4>${convertTime(data.currently.time)}</h4>
         <p id="x" class="x">x</p>
@@ -277,9 +311,9 @@ async function renderData(city, isoCode) {
                 <li>Wind Speed: <span>${data.currently.windSpeed}</span></li>
             </ul>
         </div>
-        `;
+        `; */
 
-        setIcons(data.currently.icon, document.getElementById('icon4'));
+        setIcons(data.weather[0].icon, document.getElementById('icon4'));
         const xButton = document.getElementById('x');
         xButton.addEventListener('click', function() {
             resultDescription.style.visibility = "hidden";
@@ -353,7 +387,7 @@ function initializeCity(lat, long, cityDOM) {
     let y = (newLat * 2.71186) + map.offsetTop;
     let z = window.getComputedStyle(map);
     let windowWidth = window.innerWidth;
-    console.log(windowWidth);
+    //console.log(windowWidth);
     if (parseInt(z.width, 10) > 900) {
         x = x + (x * 0.4) - 190;
         y = y + (y * 0.4) - 70;
@@ -447,6 +481,22 @@ function convertTime(time) {
 
     let date = new Date(time * 1000);
     return date.toString();
+}
+
+function convertTimeFormat(time) {
+    let date = new Date(time * 1000);
+    let result = "";
+    result = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return result;
+}
+
+//converts Kelvins to Celsius
+function convertCel(time) {
+    return (time - 273.15).toFixed(0);
+}
+//converts Kelvin to Fahrenheit
+function convertFah(time) {
+    return ((time - 273.15) * (9/5) + 32).toFixed(0);
 }
 
 function setIcons(icon, iconID) {

@@ -448,7 +448,7 @@ input:focus {
     display: grid;
     height: 200px;
     width: 680px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     position: relative;
     visibility: hidden;
     border: 2px solid gainsboro;
@@ -507,6 +507,10 @@ input:focus {
     margin: 5px 0 0 0;
 }
 
+#result-description .icon-ul img {
+    filter: grayscale(0%);
+}
+
 #result-description #icon4 {
     position: relative;
     left: 0px;
@@ -519,12 +523,7 @@ input:focus {
     padding: 0;
     position: relative;
     bottom: 0px;
-    font-size: 14px;
-}
-
-#result-description .icon-ul .temp-desc {
-    font-size: 14px;
-    width: 102.5%;
+    font-size: 20px;
 }
 
 #result-description h2 span {
@@ -573,8 +572,8 @@ input:focus {
     position: relative;
     top: 0;
     left: 0;
-    font-size: 55px;
-    margin: 10px 0 12.5px 0;
+    font-size: 42.5px;
+    margin: 10px 0 28.5px 0;
     padding: 0;
     text-align: center;
 }
