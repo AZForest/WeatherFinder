@@ -268,7 +268,7 @@ async function renderData(city, isoCode) {
                 <li>feels like ${convertCel(data.main.feels_like)}° C</li> 
             </ul>
             <div class="icon-ul">
-                <img src="images/icons/${data.weather[0].icon}.png" width=90 height=90/>
+                <img src="Images/icons/${data.weather[0].icon}.png" width=90 height=90/>
                 <p><span>${data.weather[0].main}</span></p>
             </div>
             <ul>
