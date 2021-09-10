@@ -32,3 +32,8 @@ In order to accurately portray city locations on a world image, I had to convert
 ### API:
 
 * OpenWeatherMap.org
+
+### City Coordinate Data:
+
+* https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json
+
