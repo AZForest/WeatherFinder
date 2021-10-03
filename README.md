@@ -27,7 +27,7 @@ In order to accurately portray city locations on a world image, I had to convert
 ### Built with: 
 
 * HTML, CSS
-* Javascript, including AJAX
+* Javascript
 
 ### API:
 
