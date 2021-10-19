@@ -6,6 +6,10 @@ App contains a left slider menu, which gives instructions on how to enter a sear
 
 In order to accurately portray city locations on a world image, I had to convert lat and long coordinates to x(long) and y(lat) coordinates on the image.
 
+## Links
+
+* [Live Demo](https://azforest.github.io/WeatherFinder)
+
 ## Screenshots
 
 ### Starting Screen:
