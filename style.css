@@ -134,9 +134,9 @@ header {
     padding: 10px;
     background-color: var(--primary-color);
     color: white;
-    text-shadow: 0 0 1px grey;
+    /*text-shadow: 0 0 1px grey;*/
     height: 100px;
-    border-bottom: 2px solid gainsboro;
+    /*border-bottom: 2px solid gainsboro;*/
     
 }
 
@@ -144,7 +144,7 @@ header h1 {
     margin: 5px 0 0 0;
     padding: 0;
     font-weight: 700;
-    text-shadow: 1px 1px 1px grey;
+    /*text-shadow: 1px 1px 1px grey;*/
 }
 
 @media (min-width: 1600px) {
@@ -292,6 +292,11 @@ input:focus {
     }
     .search-city {
         transform: scale(1.4);
+    }
+}
+@media(max-width: 550px) {
+    .bg-img-container {
+        display: none;
     }
 }
 
@@ -462,6 +467,14 @@ input:focus {
     }
 }
 
+@media (max-width: 550px) {
+    #result-description {
+        margin-top: 60px;
+        width: 90%;
+        height: fit-content;
+    }
+}
+
 #result-description h2 {
     margin: 10px 0 0 0;
     padding: 0;
@@ -474,6 +487,12 @@ input:focus {
     padding: 0;
     color: #fff;
     font-weight: 400;
+}
+@media (max-width: 550px) {
+    #result-description h4 {
+        max-width: 80%;
+        margin: 10px auto;
+    }
 }
 #result-description h5 {
     color: #fff !important;
@@ -506,6 +525,12 @@ input:focus {
     color: #fff;
     margin: 5px 0 0 0;
 }
+@media (max-width: 550px) {
+    #result-description .icon-ul {
+        width: 100%;
+    }
+}
+
 
 #result-description .icon-ul img {
     filter: grayscale(0%);
@@ -534,8 +559,17 @@ input:focus {
 #result-description .row {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     margin: 0 0 30px 5px;
     padding: 0;
+}
+
+@media (max-width: 550px) {
+    #result-description .row {
+        width: 90%;
+        flex-direction: column;
+        margin: 0 auto;
+    }
 }
 
 #result-description ul {
@@ -547,6 +581,13 @@ input:focus {
     font-size: 10px;
     word-spacing: .15em;
     border-radius: 25px;
+}
+@media (max-width: 550px) {
+    #result-description ul {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0 0 0;
+    }
 }
 #result-description ul li {
     padding: 2px 0;
