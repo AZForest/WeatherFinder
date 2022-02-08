@@ -218,16 +218,6 @@ input:focus {
     border: 1px solid gainsboro;
 }
 
-/*.search-results {
-    width: 300px;
-    height: 100px;
-    position: absolute;
-    top: 105px;
-    background-color: white;
-    border: 1px solid grey;
-    visibility: hidden;
-}*/
-
 .toggle {
     position: absolute;
     top: 130px;
@@ -316,31 +306,6 @@ input:focus {
     width: 100%;
 }
 
-/*.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    background-color: var(--orange-color);
-    z-index: 0;
-    cursor: pointer;
-    margin: auto;
-    visibility: hidden;
-}
-
-.dot:hover {
-    transform: scale(1.5);
-}
-
-/*label {
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    font-size: 12px;
-    position: relative;
-    top: 0px;
-    padding: 0 5px;
-    color: #fff;
-}*/
-
 .city {
     background-color: var(--primary-color);
     color: #fff;
@@ -372,57 +337,6 @@ input:focus {
     margin-top: 5px;
 }
 
-/*.la {
-    transform: translateX(-50%);
-    position: absolute;
-}
-
-.la label:hover {
-    transform: scale(1.5);
-    cursor: pointer;
-}
-
-.ny {
-    transform: translateX(-50%);
-    position: absolute;
-}
-
-.mc {
-    transform: translateX(-50%);
-    position: absolute;
-}
-
-.sp {
-    transform: translateX(-50%);
-    position: absolute;
-}
-
-.ty {
-    transform: translateX(-50%);
-    position: absolute;
-}
-
-.be {
-    transform: translateX(-50%);
-    position: absolute;
-}
-.de {
-    transform: translateX(-50%);
-    position: absolute;
-}
-.ca {
-    transform: translateX(-50%);
-    position: absolute;
-}
-.mo {
-    transform: translateX(-50%);
-    position: absolute;
-}
-.sy {
-    transform: translateX(-50%);
-    position: absolute;
-}*/
-
 #search-div {
     transform: translateX(-50%);
     position: absolute;
@@ -434,13 +348,6 @@ input:focus {
 
 .search-dot {
     background-color: #d10b64 !important;
-    /*width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    left: 0;*/
 }
 
 .search-div label {
@@ -530,11 +437,6 @@ input:focus {
 }
 
 #result-description .icon-ul {
-    /*display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    text-align: center;*/
     width: 25%;
     font-size: 18px;
     color: #fff;
